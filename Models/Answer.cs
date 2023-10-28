@@ -6,14 +6,20 @@ namespace ProfTestium.Models
 {
     public class Answer : BaseId
     {
-    
-        [Required]
+
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
+        [Display(Name = "Ответ")]
         public string Title { get; set; }
-        [Required]
+
+        [Display(Name = "Правильный ответ?")]
         public bool Correct { get; set; }
-        [Required]
+
+
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
+        [Display(Name = "Вопрос")]
         public int Query_id { get; set; }
-        [ForeignKey("Query_id")]
-        public virtual Quest Quest { get; set; }
+        public virtual Quest Quest { get; set; } = new();
+
+
     }
 }

@@ -1,19 +1,28 @@
-﻿using ProfTestium.Models.Contexts;
+﻿using Newtonsoft.Json;
+using ProfTestium.Models.Contexts;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProfTestium.Models
 {
+    /// <summary>
+    /// Сотрудник
+    /// </summary>
     public class Employee : BaseId
     {
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
+        [Display(Name = "Фамилия Имя Отчество")]
+        public string FullName { get; set; }
 
         [Required]
-        public string FullName { get; set; }
-        [Required]
-        public bool Avcive { get; set; }
+        [Display(Name = "Активный")]
+        public bool Avcive { get; set; } = true;
+
         [Required]
         public int Department_id { get; set; }
         public string User_id { get; set; }
+
+
         public string Phone { get; set; }
         [Required]
         public int Post_id { get; set; }
