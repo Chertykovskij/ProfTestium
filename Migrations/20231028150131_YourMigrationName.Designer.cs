@@ -12,8 +12,8 @@ using ProfTestium.Models.Contexts;
 namespace ProfTestium.Migrations
 {
     [DbContext(typeof(ProfTestiumContext))]
-    [Migration("20231028151855_fist")]
-    partial class fist
+    [Migration("20231028150131_YourMigrationName")]
+    partial class YourMigrationName
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -329,9 +329,6 @@ namespace ProfTestium.Migrations
                     b.Property<int>("Employee_id")
                         .HasColumnType("int");
 
-                    b.Property<int>("TestId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Test_id")
                         .HasColumnType("int");
 
@@ -342,7 +339,7 @@ namespace ProfTestium.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.HasIndex("TestId");
+                    b.HasIndex("Test_id");
 
                     b.ToTable("Raitings");
                 });
@@ -447,20 +444,20 @@ namespace ProfTestium.Migrations
                     b.HasOne("ProfTestium.Models.Course", null)
                         .WithMany()
                         .HasForeignKey("CourseId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("ProfTestium.Models.Employee", null)
                         .WithMany()
                         .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("ProfTestium.Models.Answer", b =>
                 {
                     b.HasOne("ProfTestium.Models.Quest", "Quest")
-                        .WithMany("Answers")
+                        .WithMany()
                         .HasForeignKey("QuestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -530,8 +527,8 @@ namespace ProfTestium.Migrations
 
                     b.HasOne("ProfTestium.Models.Test", "Test")
                         .WithMany("Raitings")
-                        .HasForeignKey("TestId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("Test_id")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Employee");
@@ -563,11 +560,6 @@ namespace ProfTestium.Migrations
             modelBuilder.Entity("ProfTestium.Models.Employee", b =>
                 {
                     b.Navigation("Raiting");
-                });
-
-            modelBuilder.Entity("ProfTestium.Models.Quest", b =>
-                {
-                    b.Navigation("Answers");
                 });
 
             modelBuilder.Entity("ProfTestium.Models.Test", b =>

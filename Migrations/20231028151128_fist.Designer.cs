@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProfTestium.Models.Contexts;
 
@@ -11,9 +12,10 @@ using ProfTestium.Models.Contexts;
 namespace ProfTestium.Migrations
 {
     [DbContext(typeof(ProfTestiumContext))]
-    partial class ProfTestiumContextModelSnapshot : ModelSnapshot
+    [Migration("20231028151128_fist")]
+    partial class fist
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -340,6 +342,7 @@ namespace ProfTestium.Migrations
 
                     b.HasIndex("EmployeeId");
 
+                    b.HasIndex("TestId");
 
                     b.ToTable("Raitings");
                 });
@@ -509,6 +512,7 @@ namespace ProfTestium.Migrations
             modelBuilder.Entity("ProfTestium.Models.Quest", b =>
                 {
                     b.HasOne("ProfTestium.Models.Test", "Test")
+                        .WithMany()
                         .HasForeignKey("TestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -525,6 +529,9 @@ namespace ProfTestium.Migrations
                         .IsRequired();
 
                     b.HasOne("ProfTestium.Models.Test", "Test")
+                        .WithMany()
+                        .HasForeignKey("TestId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Employee");
@@ -556,13 +563,6 @@ namespace ProfTestium.Migrations
             modelBuilder.Entity("ProfTestium.Models.Employee", b =>
                 {
                     b.Navigation("Raiting");
-                });
-
-            modelBuilder.Entity("ProfTestium.Models.Test", b =>
-                {
-                    b.Navigation("Questions");
-
-                    b.Navigation("Raitings");
                 });
 #pragma warning restore 612, 618
         }
