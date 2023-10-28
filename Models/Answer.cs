@@ -4,15 +4,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProfTestium.Models
 {
+    /// <summary>
+    ///  Ответы на вопросы теста
+    /// </summary>
     public class Answer : BaseId
     {
 
         [Required(ErrorMessage = "Поле должно быть заполнено")]
         [Display(Name = "Ответ")]
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
 
         [Display(Name = "Правильный ответ?")]
-        public bool Correct { get; set; }
+        public bool Correct { get; set; } = false;
 
 
         [Required(ErrorMessage = "Поле должно быть заполнено")]

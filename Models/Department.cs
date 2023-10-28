@@ -11,14 +11,14 @@ namespace ProfTestium.Models
 
         [Required(ErrorMessage = "Поле должно быть заполнено")]
         [Display(Name = "Наименование департамента")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [Display(Name = "Наименование департамента")]
         public int? GeneralEmployee_id { get; set; }
 
     
         [Display(Name = "Номре телефона департамента")]
-        public string Phone { get; set; }
+        public string Phone { get; set; }= string.Empty;
 
         [Required(ErrorMessage = "Поле должно быть заполнено")]
         [Display(Name = "Организация к которой отностится департамент")]

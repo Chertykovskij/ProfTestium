@@ -12,7 +12,7 @@ namespace ProfTestium.Models
     {
         [Required(ErrorMessage = "Поле должно быть заполнено")]
         [Display(Name = "Фамилия Имя Отчество")]
-        public string FullName { get; set; }
+        public string FullName { get; set; } = string.Empty;
 
         [Required]
         [Display(Name = "Действующий")]
@@ -21,25 +21,25 @@ namespace ProfTestium.Models
         [Required(ErrorMessage = "Поле должно быть заполнено")]
         [Display(Name = "Департамент в котором работает сотрудник")]
         public int Department_id { get; set; }
-        public virtual Department Department { get; set; }
+        public virtual Department Department { get; set; } = new();
 
         [Required(ErrorMessage = "Поле должно быть заполнено")]
         [Display(Name = "Связанный пользователь")]
-        public string User_id { get; set; }
+        public string User_id { get; set; }= string.Empty;
 
         [Required(ErrorMessage = "Поле должно быть заполнено")]
         [Display(Name = "Номер телефона")]
-        public string Phone { get; set; }
+        public string Phone { get; set; } =string.Empty;    
 
 
         [Required(ErrorMessage = "Поле должно быть заполнено")]
         [Display(Name = "Должность")]
         public int Post_id { get; set; }
-        public virtual Post Post { get; set; }
+        public virtual Post Post { get; set; } = new(); 
 
         [Required(ErrorMessage = "Поле должно быть заполнено")]
         [Display(Name = "Дата приема на работу")]
-        public DateTime StartDate { get; set; }
+        public DateTime StartDate { get; set; } 
 
         [Display(Name = "Дата увольнения")]
         public DateTime? EndDate { get; set; }
