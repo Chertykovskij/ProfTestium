@@ -17,6 +17,6 @@ namespace ProfTestium.Models
         /// <summary>
         /// Ответы
         /// </summary>
-        List<Answer> Answers { get; set; } = new List<Answer>();
+        public List<Answer> Answers { get; set; } = new List<Answer>();
     }
 }

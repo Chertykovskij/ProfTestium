@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProfTestium.Migrations
 {
-    public partial class First : Migration
+    public partial class YourMigrationName : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -243,14 +243,12 @@ namespace ProfTestium.Migrations
                         name: "FK_CourseEmployee_Courses_CourseId",
                         column: x => x.CourseId,
                         principalTable: "Courses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_CourseEmployee_Employees_EmployeeId",
                         column: x => x.EmployeeId,
                         principalTable: "Employees",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -263,7 +261,6 @@ namespace ProfTestium.Migrations
                     EmployeeId = table.Column<int>(type: "int", nullable: false),
                     Value = table.Column<int>(type: "int", nullable: false),
                     Test_id = table.Column<int>(type: "int", nullable: false),
-                    TestId = table.Column<int>(type: "int", nullable: false),
                     DatePassage = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -276,11 +273,10 @@ namespace ProfTestium.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Raitings_Tests_TestId",
-                        column: x => x.TestId,
+                        name: "FK_Raitings_Tests_Test_id",
+                        column: x => x.Test_id,
                         principalTable: "Tests",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -351,9 +347,9 @@ namespace ProfTestium.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Raitings_TestId",
+                name: "IX_Raitings_Test_id",
                 table: "Raitings",
-                column: "TestId");
+                column: "Test_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Tests_CourseId",

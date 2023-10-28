@@ -15,17 +15,24 @@ namespace ProfTestium.Models.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course>()
-           .HasMany(hs => hs.Employee)
-           .WithMany(h => h.Courses)
-           .UsingEntity<Dictionary<string, object>>(
-               "CourseEmployee",
-               j => j.HasOne<Employee>().WithMany().HasForeignKey("EmployeeId"),
-               j => j.HasOne<Course>().WithMany().HasForeignKey("CourseId"),
-               j =>
-               {
-                   j.Property<int>("Id").UseIdentityColumn();
-                   j.HasKey("Id");
-               });            
+            .HasMany(hs => hs.Employee)
+            .WithMany(h => h.Courses)
+            .UsingEntity<Dictionary<string, object>>(
+                "CourseEmployee",
+                j => j.HasOne<Employee>().WithMany().HasForeignKey("EmployeeId").OnDelete(DeleteBehavior.NoAction),
+                j => j.HasOne<Course>().WithMany().HasForeignKey("CourseId").OnDelete(DeleteBehavior.NoAction),
+                j =>
+                {
+                    j.Property<int>("Id").UseIdentityColumn();
+                    j.HasKey("Id");
+                });
+            modelBuilder.Entity<Raiting>()
+                .HasOne(r => r.Test)
+                .WithMany(t => t.Raitings)
+                .HasForeignKey(r => r.Test_id)
+                .OnDelete(DeleteBehavior.NoAction);
+
+
         }
 
         public DbSet<Answer> Answers { get; set; }

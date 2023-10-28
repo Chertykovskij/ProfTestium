@@ -28,8 +28,8 @@ namespace ProfTestium.Models
         [Display(Name = "Учебный материал")]
         public virtual Course Course { get; set; } = new();
 
-        List<Raiting> Raitings { get; set; } = new();
+        public List<Raiting> Raitings { get; set; } = new();
 
-        List<Quest> Questions { get; set; } = new();
+        public List<Quest> Questions { get; set; } = new();
     }
 }
