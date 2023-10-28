@@ -13,5 +13,7 @@ namespace ProfTestium.Models
         [Required(ErrorMessage = "Поле должно быть заполнено")]
         [Display(Name = "Должность")]
         public string Title { get; set; } = string.Empty;
+
+        List<Employee> Employees { get; set; } = new List<Employee>();
     }
 }

@@ -53,5 +53,9 @@ namespace ProfTestium.Models
         [Required(ErrorMessage = "Поле должно быть заполнено")]
         [Display(Name = "Номер телефона организации")]
         public string Phone { get; set; } = "";
+
+        List<Department> Departments { get; set; } = new List<Department>();
+
+        List<Course> Courses { get; set; } = new List<Course> { };
     }
 }

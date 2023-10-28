@@ -27,5 +27,9 @@ namespace ProfTestium.Models
         public int Course_id { get; set; }
         [Display(Name = "Учебный материал")]
         public virtual Course Course { get; set; } = new();
+
+        List<Raiting> Raitings { get; set; } = new();
+
+        List<Quest> Questions { get; set; } = new();
     }
 }
