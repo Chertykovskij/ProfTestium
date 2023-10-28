@@ -4,20 +4,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProfTestium.Models
 {
+    /// <summary>
+    /// Оценка сотрудника за тест
+    /// </summary>
     public class Raiting : BaseId
-    {
-
-        [Required]
+    {        
         public int Employee_id { get; set; }
-        [Required]
+
+        public virtual Employee Employee { get; set; } = new Employee();   
+        
         public int Value { get; set; }
-        [Required]
+        
         public int Test_id { get; set; }
-        [Required]
-        public DateTime DatePassage { get; set; }
-        [ForeignKey("Employee_id")]
-        public virtual Employee Employee { get; set; }
-        [ForeignKey("Test_id")]
-        public virtual Quest Quest { get; set; }
+
+        public virtual Test Test { get; set; } = new Test();
+
+        /// <summary>
+        /// Дата прохождения
+        /// </summary>
+        public DateTime DatePassage { get; set; } = DateTime.Now;
     }
 }
