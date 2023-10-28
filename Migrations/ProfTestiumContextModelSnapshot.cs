@@ -327,10 +327,7 @@ namespace ProfTestium.Migrations
                     b.Property<int>("Employee_id")
                         .HasColumnType("int");
 
-                    b.Property<int>("TestId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Test_id")
+                    b.Property<int>("Test_id")
                         .HasColumnType("int");
 
                     b.Property<int>("Value")
@@ -340,6 +337,7 @@ namespace ProfTestium.Migrations
 
                     b.HasIndex("EmployeeId");
 
+                    b.HasIndex("Test_id");
 
                     b.ToTable("Raitings");
                 });
@@ -509,6 +507,7 @@ namespace ProfTestium.Migrations
             modelBuilder.Entity("ProfTestium.Models.Quest", b =>
                 {
                     b.HasOne("ProfTestium.Models.Test", "Test")
+                        .WithMany("Questions")
                         .HasForeignKey("TestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -525,6 +524,9 @@ namespace ProfTestium.Migrations
                         .IsRequired();
 
                     b.HasOne("ProfTestium.Models.Test", "Test")
+                        .WithMany("Raitings")
+                        .HasForeignKey("Test_id")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Employee");
