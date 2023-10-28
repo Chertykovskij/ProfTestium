@@ -6,14 +6,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 //ад
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
+builder.Services.AddDbContext<ProfTestiumContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddDbContext<ProfTestiumContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddIdentityCore<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ApplicationDbContext>();
+    .AddEntityFrameworkStores<ProfTestiumContext>();
 builder.Services.AddRazorPages();
 
 
