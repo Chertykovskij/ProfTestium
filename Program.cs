@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using ProfTestium.Models.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
