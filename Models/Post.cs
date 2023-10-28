@@ -7,13 +7,8 @@ namespace ProfTestium.Models
     /// </summary>
     public class Post : BaseId
     {
-        /// <summary>
-        /// Должность
-        /// </summary>
-        [Required(ErrorMessage = "Поле должно быть заполнено")]
-        [Display(Name = "Должность")]
-        public string Title { get; set; } = string.Empty;
+        [Required]
+        public string Title { get; set; }
 
-        List<Employee> Employees { get; set; } = new List<Employee>();
     }
 }
