@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProfTestium.Models
+namespace ProfTestium.Models.Contexts
 {
 
     public class ProfTestiumContext : DbContext

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace ProfTestium.Models
+namespace ProfTestium.Models.Contexts
 {
     public class ApplicationDbContext : IdentityDbContext
     {

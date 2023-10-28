@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using ProfTestium.Models;
+using ProfTestium.Models.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //ад
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ProfTestium.Models.ApplicationDbContext>(options =>
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddDbContext<ProfTestium.Models.ProfTestiumContext>(options =>
+builder.Services.AddDbContext<ProfTestiumContext>(options =>
     options.UseSqlServer(connectionString));
 
 builder.Services.AddIdentityCore<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
