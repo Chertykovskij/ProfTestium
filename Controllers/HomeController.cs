@@ -15,6 +15,9 @@ namespace ProfTestium.Controllers
 
         public IActionResult Index()
         {
+            //
+           // ProfTestiumContext context = new ProfTestiumContext(null);
+          //  var resul = context.Portals.ToList();
             return View();
         }
 
