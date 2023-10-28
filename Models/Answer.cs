@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProfTestium.Models
 {
-    public class Answer: BaseId
+    public class Answer : BaseId
     {
     
         [Required]

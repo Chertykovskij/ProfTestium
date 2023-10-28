@@ -5,11 +5,27 @@ namespace ProfTestium.Models
 {
     public class Test : BaseId
     {
-
+        /// <summary>
+        /// Заголовок(наименование)
+        /// </summary>
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
+        [Display(Name = "Название")]
         public string Title { get; set; } = "";
-        public string Description { get; set; } = "";
-        public int Course_id { get; set; }
 
+        /// <summary>
+        /// Описание
+        /// </summary>
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
+        [Display(Name = "Описание")]
+        public string Description { get; set; } = "";
+
+        /// <summary>
+        /// Учебный материал
+        /// </summary>
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
+        [Display(Name = "Учебный материал")]
+        public int Course_id { get; set; }
+        [Display(Name = "Учебный материал")]
         public virtual Course Course { get; set; } = new();
     }
 }
