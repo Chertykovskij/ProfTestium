@@ -33,11 +33,16 @@ namespace ProfTestium.Models.Contexts
         public DbSet<Department> Departments { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Organization> Organizations { get; set; }
-        public DbSet<Portal> Portals { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<Quest> Quests { get; set; }
         public DbSet<Raiting> Raitings { get; set; }
         public DbSet<Test> Tests { get; set; }
+
+        public DbSet<Scope> Scopes { get; set; }
+        public DbSet<Tariff> Tariffs { get; set; }
+        public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<Support> Supports { get; set; }
+        
     }
 
 
