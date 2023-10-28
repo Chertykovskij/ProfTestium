@@ -11,7 +11,7 @@ namespace ProfTestium.Models.Contexts
         public ProfTestiumContext(DbContextOptions<ProfTestiumContext> options) : base(options)
         {
         }
-
+        //Коммент
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course>()
