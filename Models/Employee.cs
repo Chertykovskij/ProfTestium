@@ -51,5 +51,7 @@ namespace ProfTestium.Models
         /// </summary>
         public List<Raiting> Raiting { get; set; } = new();
 
+
+        public List<Course> Courses { get; set; } = new();
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNet.Identity;
 
 namespace ProfTestium.Models.Contexts
 {
@@ -17,17 +18,19 @@ namespace ProfTestium.Models.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Course>()
-           .HasMany(hs => hs.Emplo)
-           .WithMany(h => h.NotIncludedServices)
+           .HasMany(hs => hs.Employee)
+           .WithMany(h => h.Courses)
            .UsingEntity<Dictionary<string, object>>(
-               "TourNotIncludedServices",
-               j => j.HasOne<Tour>().WithMany().HasForeignKey("TourId"),
-               j => j.HasOne<TravelService>().WithMany().HasForeignKey("TravelServiceId"),
+               "CourseEmployee",
+               j => j.HasOne<Employee>().WithMany().HasForeignKey("EmployeeId"),
+               j => j.HasOne<Course>().WithMany().HasForeignKey("CourseId"),
                j =>
                {
                    j.Property<int>("Id").UseIdentityColumn();
                    j.HasKey("Id");
                });
+
+            
         }
 
         public DbSet<Answer> Answers { get; set; }

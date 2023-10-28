@@ -33,5 +33,7 @@ namespace ProfTestium.Models
         /// Тесты в курсе
         /// </summary>
         public List<Test> Test { get; set; } = new();
+
+        public List<Employee> Employee { get; set; } = new List<Employee> { };
     }
 }
