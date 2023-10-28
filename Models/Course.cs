@@ -4,19 +4,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProfTestium.Models
 {
-    public class Course
+    /// <summary>
+    /// Курс содерожащий тест и материал
+    /// </summary>
+    public class Course: BaseId
     {
-        [Key]
-        public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
+        [Display(Name = "Наименование курса")]
         public string Title { get; set; }
+
+        [Display(Name = "Наименование курса")]
         public string Description { get; set; }
         [Required]
         public int Organization_Id { get; set; }
         [Required]
         public bool Active { get; set; }
         public string FileCourse { get; set; }
-        [ForeignKey("Organization_Id")]
         public virtual Organization Organization { get; set; }
     }
 }

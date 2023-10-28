@@ -2,10 +2,8 @@
 
 namespace ProfTestium.Models
 {
-    public class Post
+    public class Post : BaseId
     {
-        [Key]
-        public int id { get; set; }
         [Required]
         public string Title { get; set; }
     }

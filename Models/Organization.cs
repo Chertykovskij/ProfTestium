@@ -2,10 +2,9 @@
 
 namespace ProfTestium.Models
 {
-    public class Organization
+    public class Organization : BaseId
     {
-        [Key]
-        public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
         public string Adress { get; set; }

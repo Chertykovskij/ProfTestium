@@ -3,10 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProfTestium.Models
 {
-    public class Quest
+    public class Quest : BaseId
     {
-        [Key]
-        public int Id { get; set; }
         public string Title { get; set; }
         public int? Test_id { get; set; }
         [ForeignKey("Test_id")]

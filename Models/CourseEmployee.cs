@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProfTestium.Models
 {
-    public class CourseEmployee
+    public class CourseEmployee : BaseId
     {
-        [Key]
-        public int Id { get; set; }
         [Required]
         public int Employee_id { get; set; }
         [Required]

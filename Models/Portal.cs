@@ -2,10 +2,9 @@
 
 namespace ProfTestium.Models
 {
-    public class Portal
+    public class Portal : BaseId
     {
-        [Key]
-        public int Id { get; set; }
+
         [Required]
         public string Title { get; set; }
         public string Logo { get; set; }
