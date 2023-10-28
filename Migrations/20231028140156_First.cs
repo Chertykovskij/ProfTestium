@@ -5,12 +5,27 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace ProfTestium.Migrations
 {
-    /// <inheritdoc />
     public partial class First : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Feedbacks",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Author = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: false),
+                    Avcive = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Feedbacks", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "Organizations",
                 columns: table => new
@@ -32,22 +47,6 @@ namespace ProfTestium.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Portals",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Logo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Contents = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SuperAdmin = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Portals", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Posts",
                 columns: table => new
                 {
@@ -58,6 +57,49 @@ namespace ProfTestium.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Posts", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Scopes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Scopes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Supports",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Supports", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tariffs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Cost = table.Column<double>(type: "float", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tariffs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -212,35 +254,6 @@ namespace ProfTestium.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CourseEmployees",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Employee_id = table.Column<int>(type: "int", nullable: false),
-                    EmployeeId = table.Column<int>(type: "int", nullable: false),
-                    Course_id = table.Column<int>(type: "int", nullable: false),
-                    CourseId = table.Column<int>(type: "int", nullable: false),
-                    Active = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CourseEmployees", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_CourseEmployees_Courses_CourseId",
-                        column: x => x.CourseId,
-                        principalTable: "Courses",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_CourseEmployees_Employees_EmployeeId",
-                        column: x => x.EmployeeId,
-                        principalTable: "Employees",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Raitings",
                 columns: table => new
                 {
@@ -308,16 +321,6 @@ namespace ProfTestium.Migrations
                 column: "EmployeeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseEmployees_CourseId",
-                table: "CourseEmployees",
-                column: "CourseId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CourseEmployees_EmployeeId",
-                table: "CourseEmployees",
-                column: "EmployeeId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Courses_OrganizationId",
                 table: "Courses",
                 column: "OrganizationId");
@@ -358,7 +361,6 @@ namespace ProfTestium.Migrations
                 column: "CourseId");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
@@ -368,13 +370,19 @@ namespace ProfTestium.Migrations
                 name: "CourseEmployee");
 
             migrationBuilder.DropTable(
-                name: "CourseEmployees");
-
-            migrationBuilder.DropTable(
-                name: "Portals");
+                name: "Feedbacks");
 
             migrationBuilder.DropTable(
                 name: "Raitings");
+
+            migrationBuilder.DropTable(
+                name: "Scopes");
+
+            migrationBuilder.DropTable(
+                name: "Supports");
+
+            migrationBuilder.DropTable(
+                name: "Tariffs");
 
             migrationBuilder.DropTable(
                 name: "Quests");

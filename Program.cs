@@ -1,14 +1,12 @@
+using Microsoft.EntityFrameworkCore;
 using ProfTestium.Models.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //ад
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ProfTestiumContext>(options =>
-    options.UseSqlServer(connectionString));
+string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
-builder.Services.AddDbContext<ProfTestiumContext>(options =>
-    options.UseSqlServer(connectionString));
+builder.Services.AddDbContext<ProfTestiumContext>(options => options.UseSqlServer(connection));
 
 
 
