@@ -4,15 +4,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ProfTestium.Models
 {
+    /// <summary>
+    /// Назначенные курсы сотруднику
+    /// </summary>
     public class CourseEmployee : BaseId
     {
-        [Required]
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
+        [Display(Name = "Сотрудник")]
         public int Employee_id { get; set; }
-        [Required]
+        public virtual Employee Employee { get; set; } = new();
+
+        [Required(ErrorMessage = "Поле должно быть заполнено")]
+        [Display(Name = "Курс")]
         public int Course_id { get; set; }
-        [ForeignKey("Employee_id")]
-        public virtual Employee Employee { get; set; }
-        [ForeignKey("Course_id")]
-        public virtual Course Course { get; set; }
+        public virtual Course Course { get; set; } = new();
+
+        [Display(Name = "Дествующее назначение?")]
+        public bool Active { get; set; } = true;
     }
 }
