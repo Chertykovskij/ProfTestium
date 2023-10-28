@@ -14,23 +14,28 @@ namespace ProfTestium.Models.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            //modelBuilder.Entity<Course>()
+            //.HasMany(e => e.Employee)
+            //.WithMany(e => e.Courses)
+            //.UsingEntity(
+            //"EmployeeCourse",
+            // l => l.HasOne(typeof(Employee)).WithMany().HasForeignKey("EmployeeId").HasPrincipalKey(nameof(Employee.Id)),
+            // r => r.HasOne(typeof(Course)).WithMany().HasForeignKey("CourseId").HasPrincipalKey(nameof(Post.Id)).OnDelete(,
+            // j => j.HasKey("CourseId", "EmployeeId")) ;
+
             modelBuilder.Entity<Course>()
-            .HasMany(hs => hs.Employee)
-            .WithMany(h => h.Courses)
-            .UsingEntity<Dictionary<string, object>>(
-                "CourseEmployee",
-                j => j.HasOne<Employee>().WithMany().HasForeignKey("EmployeeId").OnDelete(DeleteBehavior.NoAction),
-                j => j.HasOne<Course>().WithMany().HasForeignKey("CourseId").OnDelete(DeleteBehavior.NoAction),
-                j =>
-                {
-                    j.Property<int>("Id").UseIdentityColumn();
-                    j.HasKey("Id");
-                });
-            modelBuilder.Entity<Raiting>()
-                .HasOne(r => r.Test)
-                .WithMany(t => t.Raitings)
-                .HasForeignKey(r => r.Test_id)
-                .OnDelete(DeleteBehavior.NoAction);
+           .HasMany(hs => hs.Employee)
+           .WithMany(h => h.Courses)
+           .UsingEntity<Dictionary<string, object>>(
+               "CourseEmployee",
+               j => j.HasOne<Employee>().WithMany().HasForeignKey("EmployeeId"),
+               j => j.HasOne<Course>().WithMany().HasForeignKey("CourseId"),
+               j =>
+               {
+                   j.Property<int>("Id").UseIdentityColumn();
+                   j.HasKey("Id");
+               });
 
 
         }
