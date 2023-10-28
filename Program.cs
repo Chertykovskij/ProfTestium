@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using ProfTestium.Models.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,9 +10,6 @@ builder.Services.AddDbContext<ProfTestiumContext>(options =>
 builder.Services.AddDbContext<ProfTestiumContext>(options =>
     options.UseSqlServer(connectionString));
 
-builder.Services.AddIdentityCore<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-    .AddEntityFrameworkStores<ProfTestiumContext>();
-builder.Services.AddRazorPages();
 
 
 

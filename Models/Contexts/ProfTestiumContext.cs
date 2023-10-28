@@ -1,10 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
-using static System.Net.Mime.MediaTypeNames;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace ProfTestium.Models.Contexts
 {
