@@ -16,7 +16,18 @@ namespace ProfTestium.Models.Contexts
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<Course>()
+           .HasMany(hs => hs.Emplo)
+           .WithMany(h => h.NotIncludedServices)
+           .UsingEntity<Dictionary<string, object>>(
+               "TourNotIncludedServices",
+               j => j.HasOne<Tour>().WithMany().HasForeignKey("TourId"),
+               j => j.HasOne<TravelService>().WithMany().HasForeignKey("TravelServiceId"),
+               j =>
+               {
+                   j.Property<int>("Id").UseIdentityColumn();
+                   j.HasKey("Id");
+               });
         }
 
         public DbSet<Answer> Answers { get; set; }
