@@ -14,6 +14,11 @@ namespace ProfTestium.Models.Contexts
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+        }
+
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<CourseEmployee> CourseEmployees { get; set; }
