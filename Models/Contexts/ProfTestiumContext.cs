@@ -27,49 +27,10 @@ namespace ProfTestium.Models.Contexts
         public DbSet<Test> Tests { get; set; }
     }
 
-    public class Answer
-    {
-        [Key]
-        public int Id { get; set; }
-        [Required]
-        public string Title { get; set; }
-        [Required]
-        public bool Correct { get; set; }
-        [Required]
-        public int Query_id { get; set; }
-        [ForeignKey("Query_id")]
-        public virtual Quest Quest { get; set; }
-    }
 
-    public class Course
-    {
-        [Key]
-        public int Id { get; set; }
-        [Required]
-        public string Title { get; set; }
-        public string Description { get; set; }
-        [Required]
-        public int Organization_Id { get; set; }
-        [Required]
-        public bool Active { get; set; }
-        public string FileCourse { get; set; }
-        [ForeignKey("Organization_Id")]
-        public virtual Organization Organization { get; set; }
-    }
 
-    public class CourseEmployee
-    {
-        [Key]
-        public int Id { get; set; }
-        [Required]
-        public int Employee_id { get; set; }
-        [Required]
-        public int Course_id { get; set; }
-        [ForeignKey("Employee_id")]
-        public virtual Employee Employee { get; set; }
-        [ForeignKey("Course_id")]
-        public virtual Course Course { get; set; }
-    }
+
+
 
     public class Department
     {
