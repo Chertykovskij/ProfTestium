@@ -21,7 +21,14 @@ namespace ProfTestium.Controllers
 
         public ActionResult Details(int id)
         {
-            return View();
+            Course course = _context.Courses.Include(c => c.Organization).FirstOrDefault(t => t.Id == id);
+
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            return View(course);
         }
 
         public ActionResult Create()
