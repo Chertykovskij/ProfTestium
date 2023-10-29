@@ -1,11 +1,13 @@
 ﻿@model ProfTestium.Models.ViewModels.TestViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Delete";
 }
 
-<h4>@Model.Test.Title</h4>
+<h3>Удаление теста</h3>
 
+<h4>Вы уверены что хотите удалить этот тест?</h4>
+<p></p>
 @foreach (var question in Model.Questions)
 {
     <h5>@question.Title</h5>
@@ -26,7 +28,10 @@
         }
     </ul>
 }
-<div class="form-group btn-group">
-    <a class="btn btn-info" asp-action="Edit" asp-route-id="@Model?.Test.Id">Редактировать</a>
+    
+<form class="form-group btn-group" asp-action="Delete">
+    <input type="hidden" asp-for=@Model.Test.Id />
+    <input type="submit" value="Удалить" class="btn btn-danger" />
     <a class="btn btn-sm btn-outline-info" asp-action="Index">Вернуться к списку</a>
-</div>
+</form>
+

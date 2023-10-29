@@ -106,22 +106,36 @@ namespace ProfTestium.Controllers
        
         public ActionResult Delete(int id)
         {
-            return View();
+            Test test = _context.Tests.FirstOrDefault(t => t.Id == id);
+
+            if (test == null)
+            {
+                return NotFound();
+            }
+
+            List<Quest> questions = _context.Quests.Where(q => q.Test_id == test.Id).ToList();
+
+            foreach (Quest question in questions)
+            {
+                question.Answers = _context.Answers.Where(a => a.Query_id == question.Id).ToList();
+            }
+
+            return View(new TestViewModel { Test = test, Questions = questions });
         }
 
         
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteItem(int id)
         {
-            try
+            var item = _context.Tests.FirstOrDefault(co => co.Id == id);
+
+            if (item != null)
             {
-                return RedirectToAction(nameof(Index));
+                _context.Tests.Remove(item);
+                _context.SaveChanges();
             }
-            catch
-            {
-                return View();
-            }
+
+            return RedirectToAction("Index", "Tests");
         }
 
 
