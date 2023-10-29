@@ -64,15 +64,18 @@
                 else
                 {
                     <li name="entrance"><a style="color: #0077cc;" href="/Identity/Account/Login">ВОЙТИ</a></li>
-                   <li name="entrance"><a style="color: #0077cc;" href="/Identity/Account/Register">РЕГИСТРАЦИЯ</a></li>
-                @*}*@
+                }
 
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <li><a style="color: #0077cc;" asp-area="" asp-controller="PersonalAccount" asp-action="Index">МОЙ КАБИНЕТ</a></li>
+                    
+                }
+                else
+                {
+                    <li name="entrance"><a style="color: #0077cc;" href="/Identity/Account/Register">РЕГИСТРАЦИЯ КОМПАНИИ</a></li>
+                }
 
-
-                @*@if (SignInManager.IsSignedIn(User))
-                {*@
-                <li><a style="color: #0077cc;" asp-area="" asp-controller="PersonalAccount" asp-action="Index">МОЙ КАБИНЕТ</a></li>
-                @*}*@
 
              
 
