@@ -46,25 +46,39 @@ namespace ProfTestium.Controllers
         {
             ViewBag.Courses = await GetCourses();
 
-            return View(new Test());
+            
+
+            return View(new TestViewModelToCreate());
         }
 
 
-        
-        [HttpPost]
-        public IActionResult Create(Test test)
-        {
-            if (ModelState.IsValid)
-            {
-                // Добавление нового теста в базу данных или другую логику сохранения
-                _context.Tests.Add(test);
-                _context.SaveChanges();
 
-                return RedirectToAction("Index", "Home");
+        [HttpPost]
+        public IActionResult Create(TestViewModelToCreate testVM)
+        {
+            var test = new Test();
+            test.Title = testVM.Title;
+            test.Description = testVM.Description;
+            test.Course = testVM.Course;
+            //test.Questions = testVM.; 
+
+            _context.Tests.Add(test);
+
+            foreach (var quest in test.Questions)
+            {
+                quest.Answers = quest.Answers;
+
+                _context.Quests.Add(quest);
+
+                foreach (var answer in quest.Answers)
+                {
+                    _context.Answers.Add(answer);
+                }
             }
 
-            ViewBag.Courses = GetCourses();
-            return View(test);
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Home");
         }
 
 
