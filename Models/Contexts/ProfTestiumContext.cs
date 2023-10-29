@@ -1,29 +1,19 @@
 ﻿
 
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace ProfTestium.Models.Contexts
 {
 
-    public class ProfTestiumContext : IdentityDbContext
+    public class ProfTestiumContext : DbContext
     {
         public ProfTestiumContext(DbContextOptions<ProfTestiumContext> options) : base(options)
         {
         }
-        
+        //Коммент
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
-            // Для добавления таблиц пользователей
-            modelBuilder.Entity<IdentityUserLogin<string>>(entity =>
-            {
-                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
-            });
-
             modelBuilder.Entity<Course>()
             .HasMany(hs => hs.Employee)
             .WithMany(h => h.Courses)
