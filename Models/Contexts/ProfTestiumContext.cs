@@ -1,12 +1,11 @@
-﻿
-
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace ProfTestium.Models.Contexts
 {
 
-    public class ProfTestiumContext : DbContext
+    public class ProfTestiumContext : IdentityDbContext
     {
         public ProfTestiumContext(DbContextOptions<ProfTestiumContext> options) : base(options)
         {
