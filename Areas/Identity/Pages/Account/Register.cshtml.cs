@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using ProfTestium.Models;
 
 namespace ProfTestium.Areas.Identity.Pages.Account
 {
@@ -140,6 +141,11 @@ namespace ProfTestium.Areas.Identity.Pages.Account
                     }
                     else
                     {
+
+                        //Создание организации
+
+
+
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
                     }
