@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ProfTestium.Models.Contexts;
 
@@ -13,6 +14,11 @@ builder.Services.AddDbContext<ProfTestiumContext>(options => options.UseSqlServe
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// –абота с авторизированными пользовател€ми
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ProfTestiumContext>();
 
 var app = builder.Build();
 
