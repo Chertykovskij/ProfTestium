@@ -1,0 +1,108 @@
+﻿@model ProfTestium.Models.Test
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Добавление теста</h4>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group col-md-9">
+                <label asp-for="Course_id" class="control-label"></label>
+                <select asp-for="Course_id" class="form-control" asp-items="ViewBag.Courses"></select>
+            </div>
+
+            <hr />
+
+            <h4>Вопросы</h4>
+            <div id="вопросы-контейнер">
+                <!-- Здесь будут отображаться добавленные вопросы -->
+            </div>
+
+            <button type="button" id="add-question-btn" class="btn btn-primary">Добавить вопрос</button>
+
+            <hr />
+
+            <div class="form-group btn-group">
+                <input type="submit" value="Добавить" class="btn btn-info" />
+                <a class="btn btn-sm btn-outline-info" asp-action="Index">Вернуться к списку</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<script>
+
+    $(document).ready(function () {
+        var questionIndex = 0;
+
+        // Обработчик события клика по кнопке "Добавить вопрос"
+        $("#add-question-btn").click(function () {
+            var questionHtml = `
+                    <div class="question">
+                        <h5>Вопрос ${questionIndex + 1}</h5>
+                        <div class="form-group">
+                            <label for="Questions[${questionIndex}].Title">Вопрос</label>
+                            <input type="text" name="Questions[${questionIndex}].Title" class="form-control" required />
+                        </div>
+                        <h6>Ответы</h6>
+                        <div class="answers-container">
+                            <!-- Здесь будут отображаться добавленные ответы -->
+                        </div>
+                        <button type="button" class="btn btn-primary add-answer-btn">Добавить ответ</button>
+                        <button type="button" class="btn btn-danger remove-question-btn">Удалить вопрос</button>
+                    </div>`;
+
+            $("#вопросы-контейнер").append(questionHtml);
+            questionIndex++;
+        });
+
+        // Обработчик события клика по кнопке "Добавить ответ"
+        $(document).on("click", ".add-answer-btn", function () {
+            var questionContainer = $(this).closest(".question");
+            var answersContainer = questionContainer.find(".answers-container");
+
+            var answerIndex = answersContainer.children().length;
+
+            var answerHtml = `
+                    <div class="form-group">
+                        <label for="Questions[${questionIndex - 1}].Answers[${answerIndex}].Title">Ответ</label>
+                        <input type="text" name="Questions[${questionIndex - 1}].Answers[${answerIndex}].Title" class="form-control" required />
+                        <input type="hidden" name="Questions[${questionIndex - 1}].Answers[${answerIndex}].Correct" value="false" />
+                        <label>
+                            <input type="checkbox" name="Questions[${questionIndex - 1}].Answers[${answerIndex}].Correct" value="true" />
+                            Правильный ответ
+                        </label>
+                    </div>`;
+
+            answersContainer.append(answerHtml);
+        });
+
+        // Обработчик события клика по кнопке "Удалить вопрос"
+        $(document).on("click", ".remove-question-btn", function () {
+            $(this).closest(".question").remove();
+        });
+    });
+</script>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

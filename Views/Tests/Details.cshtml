@@ -1,0 +1,32 @@
+﻿@model ProfTestium.Models.ViewModels.TestViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h4>@Model.Test.Title</h4>
+
+@foreach (var question in Model.Questions)
+{
+    <h5>@question.Title</h5>
+
+    <ul>
+        @foreach (var answer in question.Answers)
+        {
+            <li>
+                @if (answer.Correct)
+                {
+                    <strong>@answer.Title</strong>
+                }
+                else
+                {
+                    @answer.Title
+                }
+            </li>
+        }
+    </ul>
+}
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Test.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
