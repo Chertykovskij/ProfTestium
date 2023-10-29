@@ -36,19 +36,19 @@
             <ul class="top-menu">
                 <li>
                     <a style="color: #0077cc;" asp-area="" asp-controller="Home"
-                       asp-action="Index">ВОЗМОЖНОСТИ</a>
+                       asp-action="">ВОЗМОЖНОСТИ</a>
                 </li>
                 <li>
                     <a style="color: #0077cc;" asp-area="" asp-controller="Home"
-                       asp-action="AboutUs">ТАРИФЫ</a>
+                       asp-action="">ТАРИФЫ</a>
                 </li>
                 <li>
                     <a style="color: #0077cc;" asp-area="" asp-controller="Home"
-                       asp-action="ListServices">ОТЗЫВЫ</a>
+                       asp-action="">ОТЗЫВЫ</a>
                 </li>
                 <li>
                     <a style="color: #0077cc;" asp-area="" asp-controller="Home"
-                       asp-action="Contacts">ПОДДЕРЖКА</a>
+                       asp-action="">ПОДДЕРЖКА</a>
                 </li>
 
                 @*@if (SignInManager.IsSignedIn(User))
@@ -82,32 +82,32 @@
         <aside>
             <nav>
                 <ul class="aside-menu">
-                    <li><a asp-area="" asp-controller="Tour" asp-action="Index">Наша компания</a></li>
+                    <li><a asp-area="" asp-controller="" asp-action="Index">Наша компания</a></li>
                     <li>
                         Личные данные
                         <ul class="sub-menu" style="display: none;">
                             <li>
-                                <a asp-area="" asp-controller="City" asp-action="Index">
+                                <a asp-area="" asp-controller="" asp-action="Index">
                                     Мое обучение
                                 </a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="HotelStarRating" asp-action="Index">
+                                <a asp-area="" asp-controller="" asp-action="Index">
                                     Мои тесты
                                 </a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="MealType" asp-action="Index">
+                                <a asp-area="" asp-controller="" asp-action="Index">
                                     Мои результаты
                                 </a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="HotelFacility" asp-action="Index">
+                                <a asp-area="" asp-controller="" asp-action="Index">
                                     Мои обращения
                                 </a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="RoomAmenity" asp-action="Index">
+                                <a asp-area="" asp-controller="" asp-action="Index">
                                     Мои заявки
                                 </a>
                             </li>                            
@@ -117,7 +117,7 @@
                         Материалы компании
                         <ul class="sub-menu" style="display: none;">
                             <li>
-                                <a asp-area="" asp-controller="City" asp-action="Index">
+                                <a asp-area="" asp-controller="Course" asp-action="Index">
                                     База учебных материалов
                                 </a>
                             </li>
@@ -127,7 +127,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a asp-area="" asp-controller="MealType" asp-action="Index">
+                                <a asp-area="" asp-controller="" asp-action="Index">
                                     База сотрудников
                                 </a>
                             </li>                            
@@ -135,7 +135,7 @@
                     </li>
                     @*@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                     {*@
-                    <li><a asp-area="" asp-controller="Requests" asp-action="Index">Аналитика по компании</a></li>
+                    <li><a asp-area="" asp-controller="" asp-action="Index">Аналитика по компании</a></li>
                     @*}*@
                 </ul>
             </nav>
