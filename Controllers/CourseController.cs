@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProfTestium.Models;
 using ProfTestium.Models.Contexts;
@@ -31,9 +32,11 @@ namespace ProfTestium.Controllers
             return View(course);
         }
 
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-            return View();
+            ViewBag.Organizations = await GetOrg();
+
+            return View(new Course());
         }
 
         [HttpPost]
@@ -83,6 +86,21 @@ namespace ProfTestium.Controllers
             {
                 return View();
             }
+        }
+
+        private async Task<List<SelectListItem>> GetOrg()
+        {
+            var items = await _context.Organizations.ToListAsync();
+
+
+            var listItems = items.Select(item => new SelectListItem()
+            {
+                Value = item.Id.ToString(),
+                Text = item.Name.ToString()
+            }).ToList();
+
+
+            return listItems;
         }
     }
 }

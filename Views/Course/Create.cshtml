@@ -1,0 +1,68 @@
+﻿@model ProfTestium.Models.Course
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Добавление учебного материала</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <p></p>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <p></p>
+            <div class="form-group col-md-9">
+                <label asp-for="Id" class="control-label"></label>
+                <select asp-for="Id" class="form-control" asp-items="ViewBag.Organizations"></select>
+            </div>
+            <p></p>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                </label>
+            </div>
+            <p></p>
+            @*<div class="form-group">
+                <label asp-for="FileCourse" class="control-label"></label>
+                <input asp-for="FileCourse" class="form-control" />
+                <span asp-validation-for="FileCourse" class="text-danger"></span>
+            </div>*@
+
+
+            <div class="form-group col-10 pt-0 mt-0">
+                <div class="custom-file">
+                    <input asp-for="FileCourse" class="custom-file-input" id="customFile"
+                           onchange="document.getElementById('PreviewPhoto').src
+                                        = window.URL.createObjectURL(this.files[0])" />
+                    <label class="custom-file-lable" for="customFile">Выберите фаил</label>
+                </div>
+            </div>
+
+            <p></p>
+            <div class="form-group btn-group">
+                <input type="submit" value="Добавить" class="btn btn-info" />
+                <a class="btn btn-sm btn-outline-info" asp-action="Index">Вернуться к списку</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $(".custom-file-input").on("change", function () {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-lable").addClass("selected").html(fileName);
+    });
+</script>
+
+
