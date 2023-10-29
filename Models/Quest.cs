@@ -12,7 +12,7 @@ namespace ProfTestium.Models
         [Display(Name = "Вопрос")]
         public string Title { get; set; } = string.Empty;
         public int? Test_id { get; set; }
-        public virtual Test Test { get; set; }
+        public virtual Test Test { get; set; } = new Test();
 
         /// <summary>
         /// Ответы

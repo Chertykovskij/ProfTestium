@@ -55,30 +55,31 @@ namespace ProfTestium.Controllers
 
         [HttpPost]
         public IActionResult Create(TestViewModelToCreate testVM)
-        {
-            var test = new Test();
-            test.Title = testVM.Title;
-            test.Description = testVM.Description;
-            test.Course = testVM.Course;
-            //test.Questions = testVM.; 
+        {            
+            _context.Database.ExecuteSqlRaw("INSERT INTO [Tests] VALUES ({0},{1},{2},{3})", 
+                testVM.Title, testVM.Description, testVM.Course_id, testVM.Course_id);
 
-            _context.Tests.Add(test);
+            var test = _context.Tests.OrderByDescending(t => t.Id).FirstOrDefault();
 
-            foreach (var quest in test.Questions)
+            foreach (var questVM in testVM.Questions)
             {
-                quest.Answers = quest.Answers;
+                if (string.IsNullOrEmpty(questVM.Title)) { continue; }
 
-                _context.Quests.Add(quest);
+                _context.Database.ExecuteSqlRaw("INSERT INTO Quests VALUES ({0},{1},{2})",
+                    questVM.Title, test.Id, test.Id);
 
-                foreach (var answer in quest.Answers)
+                var quest = _context.Quests.OrderByDescending(t => t.Id).FirstOrDefault();
+
+                foreach (var answerVM in questVM.Answers)
                 {
-                    _context.Answers.Add(answer);
+                    if (answerVM.Title == null) { continue; }
+
+                    _context.Database.ExecuteSqlRaw("INSERT INTO [Answers] VALUES ({0},{1},{2},{3})",
+                        answerVM.Title, answerVM.Correct ? 1 : 0, quest.Id, quest.Id);
                 }
+
             }
-
-            _context.SaveChanges();
-
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Tests");
         }
 
 
@@ -139,5 +140,7 @@ namespace ProfTestium.Controllers
 
             return listItems;
         }
+
+        
     }
 }
