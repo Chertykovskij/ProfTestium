@@ -181,7 +181,8 @@ namespace ProfTestium.Areas.Identity.Pages.Account
                         //Создание организации
 
                         Organization createdOrg = new Organization();
-                        createdOrg.Name = Input.Email;
+                        createdOrg.Name = Input.Name;
+                        createdOrg.UserAdmin = Input.Email;
                         createdOrg.INN = Input.INN;
                         createdOrg.Adress = Input.Adress;
                         createdOrg.Phone= Input.Phone;
