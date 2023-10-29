@@ -127,12 +127,6 @@ namespace ProfTestium.Areas.Identity.Pages.Account
             public string INN { get; set; } = "";
 
            
-            /// <summary>
-            /// Администратор
-            /// </summary>
-            [Required(ErrorMessage = "Поле должно быть заполнено")]
-            [Display(Name = "Администратор")]
-            public string UserAdmin { get; set; } = "";
 
             /// <summary>
             /// Номер организации организации
