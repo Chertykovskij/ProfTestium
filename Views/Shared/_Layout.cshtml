@@ -50,7 +50,7 @@
                        asp-action="Contacts">ПОДДЕРЖКА</a>
                 </li>
 
-                @*@if (SignInManager.IsSignedIn(User))
+                @if (SignInManager.IsSignedIn(User))
                 {
                     <li name="entrance">
                         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
@@ -62,9 +62,9 @@
                     </li>
                 }
                 else
-                {*@
+                {
                     <li name="entrance"><a style="color: #0077cc;" href="/Identity/Account/Login">ВОЙТИ</a></li>
-                @*}*@
+                }
 
                 @*@if (SignInManager.IsSignedIn(User))
                 {*@
