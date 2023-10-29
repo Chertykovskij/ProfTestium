@@ -17,13 +17,16 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ProfTestium.Models;
+using ProfTestium.Models.Contexts;
 
 namespace ProfTestium.Areas.Identity.Pages.Account
 {
     public class RegisterModel : PageModel
     {
+        private readonly ProfTestiumContext _context;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IUserStore<IdentityUser> _userStore;
@@ -35,8 +38,8 @@ namespace ProfTestium.Areas.Identity.Pages.Account
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
             SignInManager<IdentityUser> signInManager,
-            ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+        ILogger<RegisterModel> logger,
+            IEmailSender emailSender, ProfTestiumContext context) 
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +47,7 @@ namespace ProfTestium.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         /// <summary>
@@ -85,9 +89,9 @@ namespace ProfTestium.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Усложните пароль!", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Пароль")]
             public string Password { get; set; }
 
             /// <summary>
@@ -95,9 +99,47 @@ namespace ProfTestium.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Повторите пароль")]
+            [Compare("Password", ErrorMessage = "Пароли не совпадают!")]
             public string ConfirmPassword { get; set; }
+
+
+
+            /// <summary>
+            /// Название организации
+            /// </summary>
+            [Required(ErrorMessage = "Поле должно быть заполнено")]
+            [Display(Name = "Название организации")]
+            public string Name { get; set; } = "";
+
+            /// <summary>
+            /// Адресс организации
+            /// </summary>
+            [Required(ErrorMessage = "Поле должно быть заполнено")]
+            [Display(Name = "Адресс организации")]
+            public string Adress { get; set; } = "";
+
+            /// <summary>
+            /// ИНН
+            /// </summary>
+            [Required(ErrorMessage = "Поле должно быть заполнено")]
+            [Display(Name = "ИНН")]
+            public string INN { get; set; } = "";
+
+           
+            /// <summary>
+            /// Администратор
+            /// </summary>
+            [Required(ErrorMessage = "Поле должно быть заполнено")]
+            [Display(Name = "Администратор")]
+            public string UserAdmin { get; set; } = "";
+
+            /// <summary>
+            /// Номер организации организации
+            /// </summary>
+            [Required(ErrorMessage = "Поле должно быть заполнено")]
+            [Display(Name = "Номер телефона организации")]
+            public string Phone { get; set; } = "";
         }
 
 
@@ -144,7 +186,14 @@ namespace ProfTestium.Areas.Identity.Pages.Account
 
                         //Создание организации
 
-
+                        Organization createdOrg = new Organization();
+                        createdOrg.Name = Input.Email;
+                        createdOrg.INN = Input.INN;
+                        createdOrg.Adress = Input.Adress;
+                        createdOrg.Phone= Input.Phone;
+                        createdOrg.UserAdmin = Input.Email;
+                        await _context.Organizations.AddAsync(createdOrg);
+                        await _context.SaveChangesAsync();
 
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
